@@ -27,7 +27,19 @@ const TILE_DATA: Dictionary = {
 	"statue": {
 		"source_id": 3,
 		"atlas_coords": Vector2i(1,0)
-	}
+	},
+	"pressure_plate_up": {
+		"source_id": 7,
+		"atlas_coords": Vector2i(1,0)
+	},
+	"pressure_plate_down": {
+		"source_id": 7,
+		"atlas_coords": Vector2i(0,0)
+	},
+	"stairs": {
+		"source_id": 7,
+		"atlas_coords": Vector2i(2,0)
+	},
 }
 
 
@@ -88,3 +100,18 @@ func place_statues(statues: int):
 		var corner = corners.pick_random()
 		tilemap_layer.set_cell(corner, TILE_DATA.statue.source_id,  TILE_DATA.statue.atlas_coords)
 		corners.erase(corner)
+
+func place_pressure_plate():
+	var floor = floors.pick_random()
+	tilemap_layer.set_cell(floor, TILE_DATA.pressure_plate_up.source_id,  TILE_DATA.pressure_plate_up.atlas_coords)
+	floors.erase(floor)
+
+func place_stairs():
+	var floor = floors.pick_random()
+	tilemap_layer.set_cell(floor, TILE_DATA.stairs.source_id,  TILE_DATA.stairs.atlas_coords)
+	floors.erase(floor)
+
+func place_player(player: Player):
+	var floor = floors.pick_random()
+	player.position = (floor * 16) + Vector2i(8,8)
+	floors.erase(floor)

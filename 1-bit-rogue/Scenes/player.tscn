@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dbloogratnllc"]
+
+[ext_resource type="Texture2D" uid="uid://6o2s0f6l06m1" path="res://Sprites/1 bit warrior.svg" id="1_v0iea"]
+
+[node name="Player" type="Node2D" unique_id=1939384625]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=961146367]
+texture = ExtResource("1_v0iea")

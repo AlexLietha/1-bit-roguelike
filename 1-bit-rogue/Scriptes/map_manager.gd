@@ -1,6 +1,6 @@
 @tool
 extends Node
-
+class_name Maze
 enum Algos{
 	WALKER,
 	RECURSIZE_BACKTRACK,
@@ -17,10 +17,15 @@ enum Algos{
 @export var Holes := 0
 @export var Statues := 0
 @export var Chests := 0
-@export_tool_button("Generate Map") var map_gen_button = generate_map
+@export_tool_button("Generate Map") var map_gen_button = start
 func _ready() -> void:
 	generate_map()
+	place_objects()
 	
+func start():
+	generate_map()
+	place_objects()
+
 func generate_map():
 	if Algorithm == Algos.WALKER:
 		walker_generator.generate_map()
@@ -29,6 +34,8 @@ func generate_map():
 	elif Algorithm == Algos.PRIMS:
 		prims_gen.generate_map(Map_Dimensions, Holes)
 	map_builder.scan_map()
+	
+func place_objects():
 	map_builder.place_chests(Chests)
 	map_builder.place_statues(Statues)
-	
+	map_builder.place_pressure_plate()
