@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://dbloogratnllc"]
 
+[ext_resource type="Script" uid="uid://6ymga2jufwy2" path="res://Scenes/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://6o2s0f6l06m1" path="res://Sprites/1 bit warrior.svg" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://dihsaxepjgkut" path="res://Scriptes/movement_component.gd" id="3_vgqql"]
+[ext_resource type="Script" uid="uid://yl4c3kjkjgdp" path="res://Scriptes/input_component.gd" id="4_vgqql"]
 
 [node name="Player" type="Node2D" unique_id=1939384625]
+script = ExtResource("1_6t5aa")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=961146367]
 texture = ExtResource("1_v0iea")
+
+[node name="Movement Component" type="Node" parent="." unique_id=1054351605 node_paths=PackedStringArray("sprite")]
+unique_name_in_owner = true
+script = ExtResource("3_vgqql")
+sprite = NodePath("../Sprite2D")
+
+[node name="Input Component" type="Node" parent="." unique_id=1680467192]
+unique_name_in_owner = true
+script = ExtResource("4_vgqql")
