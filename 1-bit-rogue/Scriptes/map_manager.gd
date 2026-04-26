@@ -39,3 +39,6 @@ func place_objects():
 	map_builder.place_chests(Chests)
 	map_builder.place_statues(Statues)
 	map_builder.place_pressure_plate()
+	
+func neighbor_tiles(pos: Vector2i) -> Array[Vector2i]:
+	return map_builder.tilemap_layer.get_surrounding_cells(pos)

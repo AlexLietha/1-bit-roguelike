@@ -10,3 +10,4 @@ func new_level():
 	if map != null:
 		map.start()
 		map.map_builder.place_player(player)
+		

@@ -1,8 +1,20 @@
 extends Node
 class_name MovementComponent
 
-@export var sprite: Sprite2D 
+@export var sprite: Node2D 
+@export var speed := 1
 var direction: Vector2i = Vector2i.ZERO
-# Called when the node enters the scene tree for the first time.
-func update():
-	sprite.position += Vector2(direction * 16)
+var locked_pos: Vector2i
+var map_pos: Vector2i
+
+var moving := false
+func update(delta: float):
+	if !moving and locked_pos == Vector2i.ZERO and direction != Vector2i.ZERO:
+		locked_pos = direction * Vector2i(16, 16) + Vector2i(sprite.position)
+		moving = true
+	if moving:
+		sprite.position = sprite.position.move_toward(locked_pos, speed * delta)
+	if Vector2i(sprite.position) == locked_pos:
+		map_pos = sprite.position / 16
+		moving = false
+		locked_pos = Vector2i.ZERO

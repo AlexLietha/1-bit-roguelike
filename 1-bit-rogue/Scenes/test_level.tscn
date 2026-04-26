@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dnl7no6je8lpt" path="res://Scriptes/game_manager.gd" id="4_xq3o0"]
 
 [node name="Node2D" type="Node2D" unique_id=1877154428]
+scale = Vector2(4, 4)
 
 [node name="Map" parent="." unique_id=557895598 instance=ExtResource("1_rsyfn")]
 unique_name_in_owner = true
