@@ -9,39 +9,47 @@ var corners : Array[Vector2i] = []
 var floors : Array[Vector2i] = []
 const TILE_DATA: Dictionary = {
 	"floor": {
-		"source_id": 4,
-		"atlas_coords": Vector2i(1,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(3,0),
+		"action": "move"
 	},
 	"wall": {
-		"source_id": 4,
-		"atlas_coords": Vector2i(2,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(4,0),
+		"action": null
 	},
 	"corner": {
-		"source_id": 4,
-		"atlas_coords": Vector2i(0,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(2,0),
+		"action": null
 	},
 	"chest": {
-		"source_id": 3,
-		"atlas_coords": Vector2i(0,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(0,0),
+		"action": "interact"
 	},
 	"statue": {
-		"source_id": 3,
-		"atlas_coords": Vector2i(1,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(1,0),
+		"action": "interact"
 	},
 	"pressure_plate_up": {
-		"source_id": 7,
-		"atlas_coords": Vector2i(1,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(6,0),
+		"action": "move"
 	},
 	"pressure_plate_down": {
-		"source_id": 7,
-		"atlas_coords": Vector2i(0,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(5,0),
+		"action": "move"
 	},
 	"stairs": {
-		"source_id": 7,
-		"atlas_coords": Vector2i(2,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(7,0),
+		"action": "move"
 	},
 }
-
+var dirs:= [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 func scan_map():
 	floors.clear()
@@ -113,5 +121,23 @@ func place_stairs():
 
 func place_player(player: Player):
 	var floor = floors.pick_random()
+	player.movement_component.map_pos = floor
 	player.position = (floor * 16) + Vector2i(8,8)
 	floors.erase(floor)
+	
+func get_surrounding_actions(pos: Vector2i) -> Array[String]:
+	var actions: Array[String] = []
+	for dir in dirs:
+		var atlas_cords = tilemap_layer.get_cell_atlas_coords(pos + dir)
+		match atlas_cords:
+			TILE_DATA.chest.atlas_coords, TILE_DATA.statue.atlas_coords:
+				actions.append("Interact")
+			TILE_DATA.floor.atlas_coords, TILE_DATA.stairs.atlas_coords, TILE_DATA.pressure_plate_down.atlas_coords, TILE_DATA.pressure_plate_up.atlas_coords:
+				actions.append("Move")
+			#TILE_DATA.chest.atlas_coords, TILE_DATA.statue.atlas_coords:
+			#	actions.append("Attack")
+			TILE_DATA.wall.atlas_coords, TILE_DATA.corner.atlas_coords:
+				actions.append("Nothing")
+	return actions
+	
+	

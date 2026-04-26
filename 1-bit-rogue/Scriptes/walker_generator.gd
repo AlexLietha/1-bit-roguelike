@@ -4,12 +4,12 @@ class_name WalkerGenerator
 
 const TILE_DATA: Dictionary = {
 	"floor": {
-		"source_id": 4,
-		"atlas_coords": Vector2i(1,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(3,0)
 	},
 	"wall": {
-		"source_id": 4,
-		"atlas_coords": Vector2i(2,0)
+		"source_id": 0,
+		"atlas_coords": Vector2i(4,0)
 	}
 }
 

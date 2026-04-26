@@ -42,3 +42,4 @@ func place_objects():
 	
 func neighbor_tiles(pos: Vector2i) -> Array[Vector2i]:
 	return map_builder.tilemap_layer.get_surrounding_cells(pos)
+	

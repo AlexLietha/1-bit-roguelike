@@ -11,7 +11,7 @@ scale = Vector2(4, 4)
 unique_name_in_owner = true
 
 [node name="Player" parent="." unique_id=1939384625 instance=ExtResource("2_7w7ni")]
-position = Vector2(136, 152)
+position = Vector2(104, 56)
 
 [node name="Game Manager" type="Node" parent="." unique_id=277900401 node_paths=PackedStringArray("player")]
 script = ExtResource("4_xq3o0")
